@@ -72,13 +72,13 @@ namespace CSGODemoParser.Demo
                         parsePacket();
                         break;
                 }
-                Console.WriteLine("Test");
+                //Console.WriteLine("Test");
             }
         }
 
         private void parsePacket()
         {
-            demoReader.Skip(152); //skip cmdinfo
+            demoReader.ReadBytes(152); //ignore cmdinfo
             int seq_in = demoReader.ReadInt32();
             int seq_out = demoReader.ReadInt32();
             ignoreRawData();
@@ -87,7 +87,7 @@ namespace CSGODemoParser.Demo
         private void ignoreRawData()
         {
             int size = demoReader.ReadInt32();
-            demoReader.Skip(size);
+            demoReader.ReadBytes(size);
         }
 
         private void readUserCmd()
