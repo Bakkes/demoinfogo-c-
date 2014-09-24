@@ -1,0 +1,3 @@
+for /r %%i in (*.proto) do ProtoGen.exe --proto_path="C:/Users/Chris/Documents/Visual Studio 2012/Projects/CSGODemoParser/CSGODemoParser/proto" "%%i" --include_imports -output_directory=../generatedproto
+
+ProtoGen.exe --proto_path="C:/Users/Chris/Documents/Visual Studio 2012/Projects/CSGODemoParser/CSGODemoParser/proto" "C:/Users/Chris/Documents/Visual Studio 2012/Projects/CSGODemoParser/CSGODemoParser/proto/google/protobuf/descriptor.proto" --include_imports -output_directory=../generatedproto

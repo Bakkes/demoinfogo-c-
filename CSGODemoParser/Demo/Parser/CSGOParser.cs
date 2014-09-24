@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CSGODemoParser.Demo.Parser
 {
-    abstract class CSGOParser : IDemoParser
+    public abstract class CSGOParser : IDemoParser
     {
         protected IDemoReader demoReader { get; set; }
 
@@ -33,5 +33,7 @@ namespace CSGODemoParser.Demo.Parser
                 SignonLength = demoReader.ReadInt32()
             };
         }
+
+        public abstract void Parse();
     }
 }

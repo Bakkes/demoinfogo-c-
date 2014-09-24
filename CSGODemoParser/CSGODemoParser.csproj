@@ -30,6 +30,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Google.ProtocolBuffers">
+      <HintPath>..\..\..\..\..\Downloads\protobuf-csharp-port-2.4.1.521-release-binaries\Release\net40\Google.ProtocolBuffers.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.ProtocolBuffers.Serialization">
+      <HintPath>..\..\..\..\..\Downloads\protobuf-csharp-port-2.4.1.521-release-binaries\Release\net40\Google.ProtocolBuffers.Serialization.dll</HintPath>
+    </Reference>
     <Reference Include="protobuf-net">
       <HintPath>..\packages\protobuf-net.2.0.0.668\lib\net40\protobuf-net.dll</HintPath>
     </Reference>
@@ -48,11 +54,32 @@
     <Compile Include="Demo\DemoMessage.cs" />
     <Compile Include="Demo\IO\CSGODemoReader.cs" />
     <Compile Include="Demo\IO\IDemoReader.cs" />
+    <Compile Include="Demo\Parser\CSGOParser.cs" />
     <Compile Include="Demo\Parser\IDemoParser.cs" />
+    <Compile Include="Demo\Parser\QuickParser.cs" />
+    <Compile Include="generatedproto\BaseGcmessages.cs" />
+    <Compile Include="generatedproto\Cstrike15Gcmessages.cs" />
+    <Compile Include="generatedproto\Cstrike15Usermessages.cs" />
+    <Compile Include="generatedproto\DescriptorProtoFile.cs" />
+    <Compile Include="generatedproto\EconGcmessages.cs" />
+    <Compile Include="generatedproto\GcsdkGcmessages.cs" />
+    <Compile Include="generatedproto\Gcsystemmsgs.cs" />
+    <Compile Include="generatedproto\Htmlmessages.cs" />
+    <Compile Include="generatedproto\Netmessages.cs" />
+    <Compile Include="generatedproto\Steammessages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="proto\base_gcmessages.proto" />
+    <None Include="proto\cstrike15_gcmessages.proto" />
+    <None Include="proto\cstrike15_usermessages.proto" />
+    <None Include="proto\econ_gcmessages.proto" />
+    <None Include="proto\gcsdk_gcmessages.proto" />
+    <None Include="proto\gcsystemmsgs.proto" />
+    <None Include="proto\htmlmessages.proto" />
+    <None Include="proto\netmessages.proto" />
     <None Include="packages.config" />
+    <None Include="proto\steammessages.proto" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CSGODemoParser.IO
 {
-    interface IDemoReader
+    public interface IDemoReader
     {
         int ReadInt16();
         int ReadInt32();

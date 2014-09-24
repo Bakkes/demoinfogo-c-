@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CSGODemoParser.Demo.Parser
 {
-    interface IDemoParser
+    public interface IDemoParser
     {
         DemoHeader ParseHeader();
         void Parse();

@@ -17,7 +17,8 @@ namespace CSGODemoParser.Demo
         public DemoFile(IDemoParser parser)
         {
             this.parser = parser;
-            this.Header = parser.ParseHeader();
+            this.Header = parser.ParseHeader();//119604
+            this.parser.Parse();
         }
 
         
