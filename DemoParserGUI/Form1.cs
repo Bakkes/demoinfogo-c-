@@ -1,4 +1,6 @@
 ﻿using CSGODemoParser.Demo;
+using CSGODemoParser.Demo.Parser;
+using CSGODemoParser.IO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,7 +25,7 @@ namespace DemoParserGUI
         {
             Stopwatch sw = new Stopwatch();
             sw.Start();
-            DemoFile d = new DemoFile("C:\\Program Files (x86)\\Steam\\SteamApps\\common\\Counter-Strike Global Offensive\\csgo\\replays\\match730_003031143853852721165_1454902835_152.dem");
+            DemoFile d = new DemoFile(new QuickParser(new CSGODemoReader("C:\\Program Files (x86)\\Steam\\SteamApps\\common\\Counter-Strike Global Offensive\\csgo\\replays\\match730_003031143853852721165_1454902835_152.dem")));
             sw.Stop();
             MessageBox.Show(sw.ElapsedMilliseconds + "");
         }

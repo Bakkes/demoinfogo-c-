@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CSGODemoParser.IO
 {
-    class CSGODemoReader : IDemoReader
+    public class CSGODemoReader : IDemoReader
     {
         private static readonly char[] TRIM_CHARS = {'\0'};
 
