@@ -9,12 +9,18 @@ using System.Threading.Tasks;
 namespace CSGODemoParser.Demo.Parser
 {
     //Class that quickly finds the RankReveal message, skips over the rest
+    //Please note this is optimized for speed, if you have any other optimizations, let me know
+    public delegate void RankUpdated(CCSUsrMsg_ServerRankUpdate rankupdate);
     public class QuickParser : CSGOParser
     {
+        public CCSUsrMsg_ServerRankUpdate RankUpdate; 
+        public event RankUpdated OnRankUpdate;
+
         public QuickParser(IDemoReader reader) : base(reader)
         {
 
         }
+
         int tick = 0;
         bool finished = false;
         public override void Parse()
@@ -48,7 +54,7 @@ namespace CSGODemoParser.Demo.Parser
                 }
             }
         }
-        private List<CCSUsrMsg_ServerRankUpdate> updates = new List<CCSUsrMsg_ServerRankUpdate>();
+
         private void parsePacket()
         {
             demoReader.ReadBytes(152); //ignore cmdinfo
@@ -56,8 +62,7 @@ namespace CSGODemoParser.Demo.Parser
             int seq_out = demoReader.ReadInt32();
             int size = demoReader.ReadInt32();
             byte[] data = demoReader.ReadBytes(size);
-            if (tick < 119000)
-                return;
+
             //BinaryReader binaryReader = new BinaryReader(new MemoryStream(data));
             int index = 0;
             while (index < size)
@@ -71,8 +76,9 @@ namespace CSGODemoParser.Demo.Parser
                     CSVCMsg_UserMessage msg = CSVCMsg_UserMessage.ParseFrom(cmdData);
                     if (msg.MsgType == 52)
                     {
-                        CCSUsrMsg_ServerRankUpdate ru = CCSUsrMsg_ServerRankUpdate.ParseFrom(msg.MsgData);
-                        updates.Add(ru);
+                        RankUpdate = CCSUsrMsg_ServerRankUpdate.ParseFrom(msg.MsgData);
+                        if(OnRankUpdate != null)
+                            OnRankUpdate(RankUpdate);
                         finished = true;
                         return;
                     }
