@@ -57,6 +57,11 @@
     <Compile Include="Demo\Parser\FullParser.cs" />
     <Compile Include="Demo\Parser\CSGOParser.cs" />
     <Compile Include="Demo\Parser\IDemoParser.cs" />
+    <Compile Include="Demo\Parser\ParseObjects\DemoCmdInfo.cs" />
+    <Compile Include="Demo\Parser\ParseObjects\QAngle.cs" />
+    <Compile Include="Demo\Parser\ParseObjects\Split.cs" />
+    <Compile Include="Demo\Parser\ParseObjects\Vector.cs" />
+    <Compile Include="Demo\Parser\ParseObjects\XYZValue.cs" />
     <Compile Include="Demo\Parser\QuickParser.cs" />
     <Compile Include="generatedproto\BaseGcmessages.cs" />
     <Compile Include="generatedproto\Cstrike15Gcmessages.cs" />

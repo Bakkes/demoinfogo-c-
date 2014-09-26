@@ -13,7 +13,7 @@ namespace QuickTests
     {
         static void Main(string[] args)
         {
-            FullParser qp = new FullParser(new CSGODemoReader("X:/draft.dem"));
+            FullParser qp = new FullParser(new CSGODemoReader("X:/draft.dem")); //match730_003030909602041430032_0894226252_185 - Copy (5) - Copy.dem
             DemoFile d = new DemoFile(qp);
 
             Console.ReadLine();

@@ -27,7 +27,8 @@ namespace CSGODemoParser.Demo.Parser
                 //cmd, tick, playerslot = self.demofile.read_cmd_header()
                 byte cmd = demoReader.ReadByte();
                 tick = demoReader.ReadInt32();//119228
-                byte playerSlot = demoReader.ReadByte();
+                byte playerSlot = demoReader.ReadByte(); //always 0?
+                //Console.WriteLine(tick);
                 DemoMessage message = (DemoMessage)cmd;
                 switch (message)
                 {
@@ -42,6 +43,7 @@ namespace CSGODemoParser.Demo.Parser
                         ignoreRawData();
                         break;
                     case DemoMessage.UserCMD:
+                        Console.WriteLine("User CMD");
                         readUserCmd();
                         break;
                     case DemoMessage.Signon:
@@ -52,7 +54,7 @@ namespace CSGODemoParser.Demo.Parser
             }
         }
 
-        private T ParseXYZ<T>() where T : XYZValue, new()
+        private T parseXYZ<T>() where T : XYZValue, new()
         {
             return new T()
             {
@@ -67,16 +69,16 @@ namespace CSGODemoParser.Demo.Parser
             return new Split()
                 {
                     flags = demoReader.ReadInt32(),
-                    viewOrigin = ParseXYZ<Vector>(),
-                    viewAngles = ParseXYZ<QAngle>(),
-                    localViewAngles = ParseXYZ<QAngle>(),
-                    viewOrigin2 = ParseXYZ<Vector>(),
-                    viewAngles2 = ParseXYZ<QAngle>(),
-                    localViewAngles2 = ParseXYZ<QAngle>(),
+                    viewOrigin = parseXYZ<Vector>(),
+                    viewAngles = parseXYZ<QAngle>(),
+                    localViewAngles = parseXYZ<QAngle>(),
+                    viewOrigin2 = parseXYZ<Vector>(),
+                    viewAngles2 = parseXYZ<QAngle>(),
+                    localViewAngles2 = parseXYZ<QAngle>(),
                 };
         }
 
-        private DemoCmdInfo ReadCMDInfo()
+        private DemoCmdInfo readCMDInfo()
         {
             return new DemoCmdInfo()
             {
@@ -85,20 +87,20 @@ namespace CSGODemoParser.Demo.Parser
             };
         }
 
+        Vector lastPos = new Vector();
         private void parsePacket()
         {
-            DemoCmdInfo i = ReadCMDInfo(); 
+            DemoCmdInfo i = readCMDInfo();
             int seq_in = demoReader.ReadInt32();
             int seq_out = demoReader.ReadInt32();
             int size = demoReader.ReadInt32();
             byte[] data = demoReader.ReadBytes(size);
 
-            //BinaryReader binaryReader = new BinaryReader(new MemoryStream(data));
             int index = 0;
             while (index < size)
             {
-                int cmd = customInt32(data, size, ref index);
-                int cmdSize = customInt32(data, size, ref index);
+                int cmd = readInt32(data, size, ref index);
+                int cmdSize = readInt32(data, size, ref index);
                 if (cmd == 23)
                 {
                     byte[] cmdData = new byte[cmdSize];
@@ -115,7 +117,7 @@ namespace CSGODemoParser.Demo.Parser
             }
         }
 
-        private int customInt32(byte[] buf, int bufLength, ref int index)
+        private int readInt32(byte[] buf, int bufLength, ref int index)
         {
             int b;
             int count = 0;
@@ -138,16 +140,17 @@ namespace CSGODemoParser.Demo.Parser
             return result;
         }
 
-        private void ignoreRawData()
+        private byte[] ignoreRawData()
         {
             int size = demoReader.ReadInt32();
-            demoReader.ReadBytes(size);
+            return demoReader.ReadBytes(size);
         }
 
         private void readUserCmd()
         {
             int outgoing = demoReader.ReadInt32();
-            ignoreRawData();
+            byte[] data = ignoreRawData();
+            int b = 0;
         }
     }
 }
