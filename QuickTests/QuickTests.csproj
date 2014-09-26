@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{748C6115-9E5D-4D47-BD2D-21292111C028}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{A512659E-0DF0-4B17-90A7-A9D3FBCA2541}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CSGODemoParser</RootNamespace>
-    <AssemblyName>CSGODemoParser</AssemblyName>
+    <RootNamespace>QuickTests</RootNamespace>
+    <AssemblyName>QuickTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -36,9 +38,6 @@
     <Reference Include="Google.ProtocolBuffers.Serialization">
       <HintPath>..\..\..\..\..\Downloads\protobuf-csharp-port-2.4.1.521-release-binaries\Release\net40\Google.ProtocolBuffers.Serialization.dll</HintPath>
     </Reference>
-    <Reference Include="protobuf-net">
-      <HintPath>..\packages\protobuf-net.2.0.0.668\lib\net40\protobuf-net.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -48,39 +47,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Demo\Demo.cs" />
-    <Compile Include="Demo\DemoFile.cs" />
-    <Compile Include="Demo\DemoHeader.cs" />
-    <Compile Include="Demo\DemoMessage.cs" />
-    <Compile Include="Demo\IO\CSGODemoReader.cs" />
-    <Compile Include="Demo\IO\IDemoReader.cs" />
-    <Compile Include="Demo\Parser\FullParser.cs" />
-    <Compile Include="Demo\Parser\CSGOParser.cs" />
-    <Compile Include="Demo\Parser\IDemoParser.cs" />
-    <Compile Include="Demo\Parser\QuickParser.cs" />
-    <Compile Include="generatedproto\BaseGcmessages.cs" />
-    <Compile Include="generatedproto\Cstrike15Gcmessages.cs" />
-    <Compile Include="generatedproto\Cstrike15Usermessages.cs" />
-    <Compile Include="generatedproto\DescriptorProtoFile.cs" />
-    <Compile Include="generatedproto\EconGcmessages.cs" />
-    <Compile Include="generatedproto\GcsdkGcmessages.cs" />
-    <Compile Include="generatedproto\Gcsystemmsgs.cs" />
-    <Compile Include="generatedproto\Htmlmessages.cs" />
-    <Compile Include="generatedproto\Netmessages.cs" />
-    <Compile Include="generatedproto\Steammessages.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="proto\base_gcmessages.proto" />
-    <None Include="proto\cstrike15_gcmessages.proto" />
-    <None Include="proto\cstrike15_usermessages.proto" />
-    <None Include="proto\econ_gcmessages.proto" />
-    <None Include="proto\gcsdk_gcmessages.proto" />
-    <None Include="proto\gcsystemmsgs.proto" />
-    <None Include="proto\htmlmessages.proto" />
-    <None Include="proto\netmessages.proto" />
-    <None Include="packages.config" />
-    <None Include="proto\steammessages.proto" />
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CSGODemoParser\CSGODemoParser.csproj">
+      <Project>{748c6115-9e5d-4d47-bd2d-21292111c028}</Project>
+      <Name>CSGODemoParser</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

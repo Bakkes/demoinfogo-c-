@@ -34,22 +34,26 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.label1 = new System.Windows.Forms.Label();
             this.playerListStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openSteamProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewDemoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label1 = new System.Windows.Forms.Label();
             this.parsingProgressBar = new System.Windows.Forms.ProgressBar();
             this.progressLabel = new System.Windows.Forms.Label();
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.playerListStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // listView1
             // 
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader5,
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3,
-            this.columnHeader4});
+            this.columnHeader4,
+            this.columnHeader6});
             this.listView1.ContextMenuStrip = this.playerListStrip;
             this.listView1.FullRowSelect = true;
             this.listView1.Location = new System.Drawing.Point(-1, 22);
@@ -78,15 +82,6 @@
             // 
             this.columnHeader4.Text = "Rank";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(-1, 6);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(160, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Players you recently played with:";
-            // 
             // playerListStrip
             // 
             this.playerListStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -107,6 +102,15 @@
             this.viewDemoToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.viewDemoToolStripMenuItem.Text = "View demo";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(-1, 6);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(160, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Players you recently played with:";
+            // 
             // parsingProgressBar
             // 
             this.parsingProgressBar.Location = new System.Drawing.Point(12, 286);
@@ -122,6 +126,16 @@
             this.progressLabel.Size = new System.Drawing.Size(58, 13);
             this.progressLabel.TabIndex = 4;
             this.progressLabel.Text = "Initializing..";
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Username";
+            this.columnHeader5.Width = 140;
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "VAC";
+            this.columnHeader6.Width = 70;
             // 
             // ParsedReplaysForm
             // 
@@ -154,6 +168,8 @@
         private System.Windows.Forms.ToolStripMenuItem viewDemoToolStripMenuItem;
         private System.Windows.Forms.ProgressBar parsingProgressBar;
         private System.Windows.Forms.Label progressLabel;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
 
     }
 }

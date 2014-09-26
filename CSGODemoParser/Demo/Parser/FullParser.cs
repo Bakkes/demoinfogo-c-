@@ -1,4 +1,5 @@
-﻿using CSGODemoParser.IO;
+﻿using CSGODemoParser.Demo.Parser.ParseObjects;
+using CSGODemoParser.IO;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,15 +9,11 @@ using System.Threading.Tasks;
 
 namespace CSGODemoParser.Demo.Parser
 {
-    //Class that quickly finds the RankReveal message, skips over the rest
-    //Please note this is optimized for speed, if you have any other optimizations, let me know
-    public delegate void RankUpdated(CCSUsrMsg_ServerRankUpdate rankupdate);
-    public class QuickParser : CSGOParser
+    public class FullParser : CSGOParser
     {
-        public CCSUsrMsg_ServerRankUpdate RankUpdate; 
-        public event RankUpdated OnRankUpdate;
 
-        public QuickParser(IDemoReader reader) : base(reader)
+        public FullParser(IDemoReader reader)
+            : base(reader)
         {
 
         }
@@ -55,9 +52,42 @@ namespace CSGODemoParser.Demo.Parser
             }
         }
 
+        private T ParseXYZ<T>() where T : XYZValue, new()
+        {
+            return new T()
+            {
+                x = demoReader.ReadInt32(),
+                y = demoReader.ReadInt32(),
+                z = demoReader.ReadInt32()
+            };
+        }
+
+        private Split parseSplit()
+        {
+            return new Split()
+                {
+                    flags = demoReader.ReadInt32(),
+                    viewOrigin = ParseXYZ<Vector>(),
+                    viewAngles = ParseXYZ<QAngle>(),
+                    localViewAngles = ParseXYZ<QAngle>(),
+                    viewOrigin2 = ParseXYZ<Vector>(),
+                    viewAngles2 = ParseXYZ<QAngle>(),
+                    localViewAngles2 = ParseXYZ<QAngle>(),
+                };
+        }
+
+        private DemoCmdInfo ReadCMDInfo()
+        {
+            return new DemoCmdInfo()
+            {
+                playerOne = parseSplit(),
+                playerTwo = parseSplit()
+            };
+        }
+
         private void parsePacket()
         {
-            demoReader.ReadBytes(152); //ignore cmdinfo
+            DemoCmdInfo i = ReadCMDInfo(); 
             int seq_in = demoReader.ReadInt32();
             int seq_out = demoReader.ReadInt32();
             int size = demoReader.ReadInt32();
@@ -76,9 +106,6 @@ namespace CSGODemoParser.Demo.Parser
                     CSVCMsg_UserMessage msg = CSVCMsg_UserMessage.ParseFrom(cmdData);
                     if (msg.MsgType == 52)
                     {
-                        RankUpdate = CCSUsrMsg_ServerRankUpdate.ParseFrom(msg.MsgData);
-                        if(OnRankUpdate != null)
-                            OnRankUpdate(RankUpdate);
                         finished = true;
                         return;
                     }

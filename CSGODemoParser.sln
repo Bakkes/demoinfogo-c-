@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSGODemoParser", "CSGODemoP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoParserGUI", "DemoParserGUI\DemoParserGUI.csproj", "{11D8EFAA-778F-46DE-A98B-914673489A0C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickTests", "QuickTests\QuickTests.csproj", "{A512659E-0DF0-4B17-90A7-A9D3FBCA2541}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{11D8EFAA-778F-46DE-A98B-914673489A0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11D8EFAA-778F-46DE-A98B-914673489A0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11D8EFAA-778F-46DE-A98B-914673489A0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A512659E-0DF0-4B17-90A7-A9D3FBCA2541}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A512659E-0DF0-4B17-90A7-A9D3FBCA2541}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A512659E-0DF0-4B17-90A7-A9D3FBCA2541}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A512659E-0DF0-4B17-90A7-A9D3FBCA2541}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

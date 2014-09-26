@@ -15,10 +15,11 @@ namespace DemoParserGUI
 		optional int32 num_wins = 4;
 		optional float rank_change = 5;
          */
+        public string Username { get; set; }
         public int AccountID32 { get; set; }
         public int Rank { get; set; }
         public int WinCount { get; set; }
-
+        public int lastVac { get; set; }
         public long AccountID64
         {
             get
