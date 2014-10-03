@@ -18,6 +18,10 @@ namespace CSGODemoParser.Demo
         {
             this.parser = parser;
             this.Header = parser.ParseHeader();//119604
+        }
+
+        public void Parse()
+        {
             this.parser.Parse();
         }
 

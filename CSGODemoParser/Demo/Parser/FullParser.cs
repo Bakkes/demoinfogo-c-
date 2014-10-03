@@ -6,12 +6,15 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using pb = global::Google.ProtocolBuffers;
 
 namespace CSGODemoParser.Demo.Parser
 {
+    public delegate void NetMessageCallback(NetMessage message);
+
     public class FullParser : CSGOParser
     {
-
+        private Dictionary<int, List<NetMessageCallback>> callbacks = new Dictionary<int, List<NetMessageCallback>>();
         public FullParser(IDemoReader reader)
             : base(reader)
         {
@@ -43,7 +46,6 @@ namespace CSGODemoParser.Demo.Parser
                         ignoreRawData();
                         break;
                     case DemoMessage.UserCMD:
-                        Console.WriteLine("User CMD");
                         readUserCmd();
                         break;
                     case DemoMessage.Signon:
@@ -62,6 +64,14 @@ namespace CSGODemoParser.Demo.Parser
                 y = demoReader.ReadInt32(),
                 z = demoReader.ReadInt32()
             };
+        }
+
+        public void RegisterCallback(int command, NetMessageCallback callback) 
+        {
+            if(!callbacks.ContainsKey(command)) {
+                callbacks.Add(command, new List<NetMessageCallback>());
+            }
+            callbacks[command].Add(callback);
         }
 
         private Split parseSplit()
@@ -87,7 +97,6 @@ namespace CSGODemoParser.Demo.Parser
             };
         }
 
-        Vector lastPos = new Vector();
         private void parsePacket()
         {
             DemoCmdInfo i = readCMDInfo();
@@ -101,15 +110,19 @@ namespace CSGODemoParser.Demo.Parser
             {
                 int cmd = readInt32(data, size, ref index);
                 int cmdSize = readInt32(data, size, ref index);
-                if (cmd == 23)
+                if (callbacks.ContainsKey(cmd))
                 {
-                    byte[] cmdData = new byte[cmdSize];
-                    Array.Copy(data, index, cmdData, 0, cmdSize);
-                    CSVCMsg_UserMessage msg = CSVCMsg_UserMessage.ParseFrom(cmdData);
-                    if (msg.MsgType == 52)
+                    NetMessage msg = new NetMessage()
                     {
-                        finished = true;
-                        return;
+                        Command = cmd,
+                        CommandSize = cmdSize,
+                        Data = new byte[cmdSize]
+                    };
+                    Array.Copy(data, index, msg.Data, 0, cmdSize);
+
+                    foreach (NetMessageCallback callback in this.callbacks[cmd])
+                    {
+                        callback(msg);
                     }
                 }
                 

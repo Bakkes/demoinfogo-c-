@@ -57,6 +57,7 @@
     <Compile Include="Demo\Parser\FullParser.cs" />
     <Compile Include="Demo\Parser\CSGOParser.cs" />
     <Compile Include="Demo\Parser\IDemoParser.cs" />
+    <Compile Include="Demo\Parser\NetMessage.cs" />
     <Compile Include="Demo\Parser\ParseObjects\DemoCmdInfo.cs" />
     <Compile Include="Demo\Parser\ParseObjects\QAngle.cs" />
     <Compile Include="Demo\Parser\ParseObjects\Split.cs" />
