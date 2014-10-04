@@ -42,7 +42,7 @@ namespace CSGODemoParser.Demo.Parser
                     case DemoMessage.ConsoleCMD:
                     case DemoMessage.Datatables:
                     case DemoMessage.StringTables:
-                        ignoreRawData();
+                        readRawData();
                         break;
                     case DemoMessage.UserCMD:
                         readUserCmd();
@@ -67,8 +67,8 @@ namespace CSGODemoParser.Demo.Parser
             int index = 0;
             while (index < size)
             {
-                int cmd = customInt32(data, size, ref index);
-                int cmdSize = customInt32(data, size, ref index);
+                int cmd = readInt32(data, size, ref index);
+                int cmdSize = readInt32(data, size, ref index);
                 if (cmd == 23)
                 {
                     byte[] cmdData = new byte[cmdSize];
@@ -86,41 +86,6 @@ namespace CSGODemoParser.Demo.Parser
                 
                 index += cmdSize;
             }
-        }
-
-        private int customInt32(byte[] buf, int bufLength, ref int index)
-        {
-            int b;
-            int count = 0;
-            int result = 0;
-            do
-            {
-                if (count == 5)
-                {
-                    return result;
-                }
-                else if (index >= bufLength)
-                {
-                    return result;
-                }
-                b = buf[index++];
-                result |= (b & 0x7F) << (7 * count);
-                ++count;
-            } while ((b & 0x80) != 0);
-
-            return result;
-        }
-
-        private void ignoreRawData()
-        {
-            int size = demoReader.ReadInt32();
-            demoReader.ReadBytes(size);
-        }
-
-        private void readUserCmd()
-        {
-            int outgoing = demoReader.ReadInt32();
-            ignoreRawData();
         }
     }
 }

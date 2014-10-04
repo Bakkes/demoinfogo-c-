@@ -34,6 +34,42 @@ namespace CSGODemoParser.Demo.Parser
             };
         }
 
+        protected int readInt32(byte[] buf, int bufLength, ref int index)
+        {
+            int b;
+            int count = 0;
+            int result = 0;
+            do
+            {
+                if (count == 5)
+                {
+                    return result;
+                }
+                else if (index >= bufLength)
+                {
+                    return result;
+                }
+                b = buf[index++];
+                result |= (b & 0x7F) << (7 * count);
+                ++count;
+            } while ((b & 0x80) != 0);
+
+            return result;
+        }
+
+
+        protected byte[] readRawData()
+        {
+            int size = demoReader.ReadInt32();
+            return demoReader.ReadBytes(size);
+        }
+
+        protected void readUserCmd()
+        {
+            int outgoing = demoReader.ReadInt32();
+            byte[] data = readRawData();
+        }
+
         public abstract void Parse();
     }
 }
