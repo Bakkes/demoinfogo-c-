@@ -215,7 +215,7 @@ namespace CSGODemoParser.Demo.IO
             {
 
             }
-            return -1;
+            return false;
         }
 
 

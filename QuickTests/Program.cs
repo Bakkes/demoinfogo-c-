@@ -11,27 +11,28 @@ namespace QuickTests
 {
     class Program
     {
-        public static Dictionary<string, object> configItems = new Dictionary<string, object>();
+        private static Dictionary<String, ICommand> commands = new Dictionary<String, ICommand>()
+        {
+            {"convars", new ConvarDumper()} //this is so not efficient when you get multiple commmands..
+        };
+
         static void Main(string[] args)
         {
-            FullParser qp = new FullParser(new CSGODemoReader("C:\\Program Files (x86)\\Steam\\SteamApps\\common\\Counter-Strike Global Offensive\\csgo\\draft.dem")); //match730_003030909602041430032_0894226252_185 - Copy (5) - Copy.dem
-            DemoFile d = new DemoFile(qp);
-            int convarMessage = Netmessages.Descriptor.FindTypeByName<Google.ProtocolBuffers.Descriptors.EnumDescriptor>("NET_Messages").FindValueByName("net_SetConVar").Number;
-            qp.RegisterCallback(convarMessage, cb);
-            d.Parse();
-            foreach (KeyValuePair<String, object> configItem in configItems)
+            if (args.Length <= 1)
             {
-                Console.WriteLine(configItem.Key + " " + configItem.Value);
+                Console.WriteLine("Usage: programname commandname argument1 argument2");
+                return;
+            }
+            String method = args[0];
+            if (commands.ContainsKey(method))
+            {
+                commands[method].Execute(args);
+            }
+            else
+            {
+                Console.WriteLine("Unknown command " + args[0]);
             }
             Console.ReadLine();
-        }
-        public static void cb(NetMessage msg)
-        {
-            CNETMsg_SetConVar cvars = CNETMsg_SetConVar.ParseFrom(msg.Data);
-            foreach (CMsg_CVars.Types.CVar cvar in cvars.Convars.CvarsList)
-            {
-                configItems[cvar.Name] = cvar.Value;
-            }
         }
     }
 }
