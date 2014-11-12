@@ -40,8 +40,12 @@ namespace CSGODemoParser.Demo.Parser
                     case DemoMessage.Stop:
                         finished = true;
                         break;
-                    case DemoMessage.ConsoleCMD:
+                    
                     case DemoMessage.Datatables:
+                        byte[] buf = readRawData();
+
+                        break;
+                    case DemoMessage.ConsoleCMD:
                     case DemoMessage.StringTables:
                         readRawData();
                         break;
@@ -53,6 +57,16 @@ namespace CSGODemoParser.Demo.Parser
                         parsePacket();
                         break;
                 }
+            }
+        }
+
+        private bool parseDataTable(byte[] buffer)
+        {
+            CSVCMsg_SendTable msg;
+            BinaryReader reader = new BinaryReader(new MemoryStream(buffer));
+            while (true)
+            {
+                int type = reader.ReadInt32();
             }
         }
 

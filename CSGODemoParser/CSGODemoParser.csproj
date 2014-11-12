@@ -52,6 +52,7 @@
     <Compile Include="Demo\DemoFile.cs" />
     <Compile Include="Demo\DemoHeader.cs" />
     <Compile Include="Demo\DemoMessage.cs" />
+    <Compile Include="Demo\IO\BitBuffer.cs" />
     <Compile Include="Demo\IO\CSGODemoReader.cs" />
     <Compile Include="Demo\IO\IDemoReader.cs" />
     <Compile Include="Demo\Parser\FullParser.cs" />
