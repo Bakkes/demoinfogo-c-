@@ -17,8 +17,7 @@ namespace QuickTests
         {
             FullParser qp = new FullParser(new CSGODemoReader(args[1])); //match730_003030909602041430032_0894226252_185 - Copy (5) - Copy.dem
             DemoFile d = new DemoFile(qp);
-            int convarMessage = Netmessages.Descriptor.FindTypeByName<Google.ProtocolBuffers.Descriptors.EnumDescriptor>("NET_Messages").FindValueByName("net_SetConVar").Number;
-            qp.RegisterCallback(convarMessage, cb);
+            qp.RegisterNetMessageCallback("net_SetConVar", cb);
             d.Parse();
             foreach (KeyValuePair<String, object> configItem in configItems)
             {

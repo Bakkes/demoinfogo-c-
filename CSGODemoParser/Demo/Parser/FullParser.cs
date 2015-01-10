@@ -42,6 +42,7 @@ namespace CSGODemoParser.Demo.Parser
                         break;
                     
                     case DemoMessage.Datatables:
+                        parseDataTables();
                         break;
                     case DemoMessage.ConsoleCMD:
                     case DemoMessage.StringTables:
@@ -80,6 +81,22 @@ namespace CSGODemoParser.Demo.Parser
                 y = demoReader.ReadInt32(),
                 z = demoReader.ReadInt32()
             };
+        }
+
+        public void RegisterNetMessageCallback(String command, NetMessageCallback callback)
+        {
+            RegisterMessageCallback("NET_Messages", command, callback);
+        }
+
+        public void RegisterSVCMessageCallback(String command, NetMessageCallback callback)
+        {
+            RegisterMessageCallback("SVC_Messages", command, callback);
+        }
+
+        public void RegisterMessageCallback(String messageType, String messageName, NetMessageCallback callback)
+        {
+            int number = Netmessages.Descriptor.FindTypeByName<Google.ProtocolBuffers.Descriptors.EnumDescriptor>("NET_Messages").FindValueByName("net_SetConVar").Number;
+            RegisterCallback(number, callback);
         }
 
         public void RegisterCallback(int command, NetMessageCallback callback) 
