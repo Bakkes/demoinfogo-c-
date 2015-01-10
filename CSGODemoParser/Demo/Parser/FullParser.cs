@@ -42,8 +42,6 @@ namespace CSGODemoParser.Demo.Parser
                         break;
                     
                     case DemoMessage.Datatables:
-                        byte[] buf = readRawData();
-
                         break;
                     case DemoMessage.ConsoleCMD:
                     case DemoMessage.StringTables:
@@ -58,6 +56,10 @@ namespace CSGODemoParser.Demo.Parser
                         break;
                 }
             }
+        }
+        public void parseDataTables()
+        {
+            byte[] buf = readRawData();
         }
 
         private bool parseDataTable(byte[] buffer)

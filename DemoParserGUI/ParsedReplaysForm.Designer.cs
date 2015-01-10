@@ -30,18 +30,19 @@
         {
             this.components = new System.ComponentModel.Container();
             this.listView1 = new System.Windows.Forms.ListView();
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.playerListStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openSteamProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewDemoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.parsingProgressBar = new System.Windows.Forms.ProgressBar();
             this.progressLabel = new System.Windows.Forms.Label();
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.demoFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.playerListStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -63,6 +64,11 @@
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Username";
+            this.columnHeader5.Width = 140;
+            // 
             // columnHeader1
             // 
             this.columnHeader1.Text = "AccountID";
@@ -82,13 +88,18 @@
             // 
             this.columnHeader4.Text = "Rank";
             // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "VAC";
+            this.columnHeader6.Width = 70;
+            // 
             // playerListStrip
             // 
             this.playerListStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openSteamProfileToolStripMenuItem,
             this.viewDemoToolStripMenuItem});
             this.playerListStrip.Name = "playerListStrip";
-            this.playerListStrip.Size = new System.Drawing.Size(176, 48);
+            this.playerListStrip.Size = new System.Drawing.Size(176, 70);
             // 
             // openSteamProfileToolStripMenuItem
             // 
@@ -98,6 +109,8 @@
             // 
             // viewDemoToolStripMenuItem
             // 
+            this.viewDemoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.demoFileToolStripMenuItem});
             this.viewDemoToolStripMenuItem.Name = "viewDemoToolStripMenuItem";
             this.viewDemoToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.viewDemoToolStripMenuItem.Text = "View demo";
@@ -127,15 +140,11 @@
             this.progressLabel.TabIndex = 4;
             this.progressLabel.Text = "Initializing..";
             // 
-            // columnHeader5
+            // demoFileToolStripMenuItem
             // 
-            this.columnHeader5.Text = "Username";
-            this.columnHeader5.Width = 140;
-            // 
-            // columnHeader6
-            // 
-            this.columnHeader6.Text = "VAC";
-            this.columnHeader6.Width = 70;
+            this.demoFileToolStripMenuItem.Name = "demoFileToolStripMenuItem";
+            this.demoFileToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.demoFileToolStripMenuItem.Text = "DemoFile";
             // 
             // ParsedReplaysForm
             // 
@@ -170,6 +179,7 @@
         private System.Windows.Forms.Label progressLabel;
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
+        private System.Windows.Forms.ToolStripMenuItem demoFileToolStripMenuItem;
 
     }
 }

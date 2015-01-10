@@ -20,6 +20,8 @@ namespace DemoParserGUI
 {
     public partial class ParsedReplaysForm : Form
     {
+        ToolStripMenuItem toolStrip;
+
         int filesParsed = 0;
         private string[] demoFiles;
         private string replayFolder;
@@ -33,8 +35,24 @@ namespace DemoParserGUI
         
         private void Form1_Load(object sender, EventArgs e)
         {
+            
+            playerListStrip.Opening += playerListStrip_Opening;
+            toolStrip = new ToolStripMenuItem("TEST");
+            toolStrip.Text = "TEST";
+            playerListStrip.Items.Add(toolStrip);
+            //toolStrip.Click += new EventHandler(Item_Click);
+            //toolStrip.CheckOnClick = true;
             demoFiles = Directory.GetFiles(replayFolder, "*.dem");
             refresh();
+        }
+
+        void playerListStrip_Opening(object sender, CancelEventArgs e)
+        {
+            toolStrip.DropDownItems.Clear();
+            foreach (String demoFile in users[listView1.SelectedIndices[0]].DemoFiles)
+            {
+                toolStrip.DropDownItems.Add(demoFile);
+            }
         }
 
         private void RankUpdateThread()
@@ -43,8 +61,8 @@ namespace DemoParserGUI
             {
                 QuickParser qp = new QuickParser(new CSGODemoReader(file));
                 DemoFile d = new DemoFile(qp);
-
-                if (qp.RankUpdate.RankUpdateList != null)
+                d.Parse();
+                if (qp.RankUpdate != null && qp.RankUpdate.RankUpdateList != null)
                 {
                     foreach (var update in qp.RankUpdate.RankUpdateList)
                     {
@@ -87,7 +105,7 @@ namespace DemoParserGUI
                 {
                     foreach (SteamUser user in users.Values)
                     {
-                        ListViewItem lvi = new ListViewItem(new string[] { user.AccountID32.ToString(), user.AccountID64.ToString(), user.WinCount.ToString(), user.Rank.ToString() });
+                        ListViewItem lvi = new ListViewItem(new string[] { "-1", user.AccountID32.ToString(), user.AccountID64.ToString(), user.WinCount.ToString(), user.Rank.ToString(), "UNKNOWN" });
                         listView1.Items.Add(lvi);
                     }
                 });
